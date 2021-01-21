@@ -1,0 +1,43 @@
+{% extends 'core/base.html' %}
+
+
+{% block body_block %}
+<h2>Register Doctor View</h2>
+<div class="doctor-form-container">
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-input">
+            {{user_form.username.label}} {{user_form.username}}
+        </div>
+
+        <div class="form-input">
+            {{user_form.first_name.label}} {{user_form.first_name}}
+        </div>
+
+        <div class="form-input">
+            {{user_form.last_name.label}} {{user_form.last_name}}
+        </div>
+
+        <div class="form-input">
+            {{user_form.email.label}} {{user_form.email}}
+        </div>
+
+        <div class="form-input">
+            {{ doctor_form.as_p }}
+        </div>
+
+        <div class="form-input">
+            {{user_form.password.label}} {{user_form.password}}
+        </div>
+        
+        <input type="submit" value="Register" class="btn btn-primary">
+        
+    </form>
+</div>
+
+<style>
+    .form-input {
+        margin-bottom: 10px;
+    }
+</style>
+{% endblock body_block %}

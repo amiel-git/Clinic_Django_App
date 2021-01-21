@@ -3,6 +3,10 @@
 {% block body_block %}
 
 <h2> REGISTER View </h2>
+{% if is_staff %}
+<a href="{% url 'doctor:register_doctor' %}" class='btn btn-warning'>Create doctor</a>
+<hr>
+{% endif %}
 <div class="form-container">
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}

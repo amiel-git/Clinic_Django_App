@@ -18,7 +18,13 @@ def index(request):
 def create_staff_view(request):
     user_form = forms.UserForm
     staff_form = forms.StaffForm
-    context = {'user_form':user_form,'staff_form':staff_form }
+    staff = request.user.is_staff
+    context = {'user_form':user_form,'staff_form':staff_form, 'is_staff':staff }
+
+    #Only staff can register doctors
+    if request.user.is_staff == False:
+        return HttpResponseRedirect(reverse('accounts:index'))
+
     if request.method == "POST":
 
         user_form = forms.UserForm(request.POST)

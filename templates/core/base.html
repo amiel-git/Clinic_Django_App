@@ -16,6 +16,9 @@
         <div class="collapse navbar-collapse" id="navbarNav">
 
           <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="http://127.0.0.1:8000/admin">Admin</a>
+            </li>
             {% if user.is_authenticated %}
             <li class="nav-item active">
               <a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a>
