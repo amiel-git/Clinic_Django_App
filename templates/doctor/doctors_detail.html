@@ -1,0 +1,15 @@
+{% extends 'core/base.html' %}
+
+
+{% block body_block %}
+<h2>Doctor Detail View</h2>
+
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">{{doctor_detail.user.first_name | title}} {{doctor_detail.user.last_name | title}}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Details</h6>
+      <p class="card-text">Email: {{doctor_detail.user.email}}</p>
+      <p class="card-text">Contact Number: {{doctor_detail.contact_number}}</p>
+    </div>
+  </div>
+{% endblock body_block %}

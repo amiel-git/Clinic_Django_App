@@ -1,10 +1,14 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
+from doctor.models import Doctor
+
 from doctor.forms import DoctorForm
 from accounts.forms import UserForm
 
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
+
+from django.views import generic
 
 def create_doctor_view(request):
     user_form = UserForm()
@@ -34,3 +38,15 @@ def create_doctor_view(request):
             return HttpResponse("Invalid form submission")
 
     return render(request,'doctor/register_doctor.html',context=context)
+
+
+class Doctor_listview(generic.ListView):
+    context_object_name = 'doctors'
+    template_name = 'doctor/doctors_list.html'
+    model = Doctor
+
+
+class Doctor_detailview(generic.DetailView):
+    template_name = 'doctor/doctors_detail.html'
+    model = Doctor
+    context_object_name = 'doctor_detail'
