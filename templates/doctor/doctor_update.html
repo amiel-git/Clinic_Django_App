@@ -1,0 +1,17 @@
+{% extends 'core/base.html' %}
+
+
+{% block body_block %}
+
+<h2>Update View</h2>
+<form method="POST">
+    {%csrf_token%}
+    {{ form.as_p }}
+
+    {% for formset in inlines %}
+      {{ formset.as_p }}
+    {% endfor %}
+    
+    <input type="submit" class="btn btn-warning" value="Update">
+</form>
+{% endblock body_block %}

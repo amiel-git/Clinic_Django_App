@@ -1,0 +1,16 @@
+{% extends 'core/base.html' %}
+
+{% block body_block %}
+
+<div class="jumbotron">
+
+    <h2>Are you sure you want to delete {{doctor.user.first_name}}?</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Delete" class="btn btn-warning"> <a href="{% url 'doctor:doctor_list' %}">CANCEL</a>
+    </form>
+    
+   
+</div>
+
+{% endblock body_block %}

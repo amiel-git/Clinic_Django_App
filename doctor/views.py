@@ -6,9 +6,10 @@ from doctor.forms import DoctorForm
 from accounts.forms import UserForm
 
 from django.http import HttpResponseRedirect, HttpResponse
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 
 from django.views import generic
+from extra_views import UpdateWithInlinesView, InlineFormSet
 
 def create_doctor_view(request):
     user_form = UserForm()
@@ -50,3 +51,23 @@ class Doctor_detailview(generic.DetailView):
     template_name = 'doctor/doctors_detail.html'
     model = Doctor
     context_object_name = 'doctor_detail'
+
+
+class Doctor_deleteview(generic.DeleteView):
+    model = Doctor
+
+    success_url = reverse_lazy('doctor:doctor_list')
+
+class DoctorInline(InlineFormSet):
+    model = Doctor
+    fields = ('contact_number','profile_picture')
+
+class Doctor_updateview(UpdateWithInlinesView):
+
+    model = User
+    inlines = [DoctorInline]
+    fields = ('username','first_name','last_name','email')
+    template_name = 'doctor/doctor_update.html'
+
+    def get_success_url(self):
+        return self.object.get_absolute_url()

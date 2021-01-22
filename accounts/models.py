@@ -11,3 +11,6 @@ class StaffAdmin(models.Model):
     def __str__(self):
         return f"{self.user.first_name} {self.user.last_name}"
     
+    def get_absolute_url(self):
+        return reverse("doctor:doctor_list")
+    

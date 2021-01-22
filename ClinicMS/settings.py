@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'accounts',
     'rest_framework',
     'rest_framework.authtoken',
+    'extra_views',
     'doctor'
 ]
 
@@ -117,6 +118,9 @@ USE_L10N = True
 
 USE_TZ = True
 
+ABSOLUTE_URL_OVERRIDES = {
+    'auth.user': lambda u: "/doctor",
+}
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/s3.1/howto/static-files/

@@ -11,5 +11,8 @@
       <p class="card-text">Email: {{doctor_detail.user.email}}</p>
       <p class="card-text">Contact Number: {{doctor_detail.contact_number}}</p>
     </div>
+    <a href="{% url 'doctor:doctor_update' pk=doctor_detail.id %}" class="btn btn-warning">Update</a>
+    <br>
+    <a href="{% url 'doctor:doctor_delete' pk=doctor_detail.id%}" class="btn btn-danger">Delete</a>
   </div>
 {% endblock body_block %}

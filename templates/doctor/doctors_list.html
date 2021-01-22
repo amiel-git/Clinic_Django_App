@@ -6,7 +6,7 @@
 <div class="doctors-list-container">
     <ul>
         {% for doctor in doctors %}
-            <li><a href="{% url 'doctor:doctor_detail' pk=doctor.id %}">{{ doctor.user.first_name | title }} {{ doctor.user.last_name | title }}</a></li>
+        <li><a href="{% url 'doctor:doctor_detail' pk=doctor.id %}">{{ doctor.user.first_name | title }} {{ doctor.user.last_name | title }}</a></li>
         {% endfor %}
     </ul>
 </div>
