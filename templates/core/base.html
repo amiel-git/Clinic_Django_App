@@ -21,6 +21,9 @@
             </li>
             {% if user.is_authenticated %}
             <li class="nav-item active">
+              <a class="nav-link" href="{% url 'doctor:doctor_list' %}">Doctors</a>
+            </li>
+            <li class="nav-item active">
               <a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a>
             </li>
             {% else %}

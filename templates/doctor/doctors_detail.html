@@ -7,11 +7,13 @@
 <div class="card" style="width: 18rem;">
     <div class="card-body">
       <h5 class="card-title">{{doctor_detail.user.first_name | title}} {{doctor_detail.user.last_name | title}}</h5>
+      <br>
       <h6 class="card-subtitle mb-2 text-muted">Details</h6>
+      <p class="card-text">Username: {{doctor_detail.user.username}}</p>
       <p class="card-text">Email: {{doctor_detail.user.email}}</p>
       <p class="card-text">Contact Number: {{doctor_detail.contact_number}}</p>
     </div>
-    <a href="{% url 'doctor:doctor_update' pk=doctor_detail.id %}" class="btn btn-warning">Update</a>
+    <a href="{% url 'doctor:doctor_update' pk=doctor_detail.user.id %}" class="btn btn-warning">Update</a>
     <br>
     <a href="{% url 'doctor:doctor_delete' pk=doctor_detail.id%}" class="btn btn-danger">Delete</a>
   </div>
