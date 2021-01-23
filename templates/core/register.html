@@ -1,16 +1,26 @@
 {% extends 'core/base.html' %}
 
+{% block head_block %}
+{% load static %}
+{% load formcss %}
+<link rel="stylesheet" href="{% static 'css/register_staff.css'%}">
+{% endblock head_block %}
+
+
 {% block body_block %}
 
-<h2> REGISTER View </h2>
-{% if is_staff %}
-<a href="{% url 'doctor:register_doctor' %}" class='btn btn-warning'>Create doctor</a>
-<hr>
-{% endif %}
-<div class="form-container">
+<div class="register-staff-form-container">
+    <h3 style="color:#5f5f5f;">Register a new staff</h3>
+    <hr>
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ user_form.as_p }}
+        {% for field in user_form %}
+        <div class="form-group">
+            {{field.label_tag}} {{field | addclass:"form-control"}}
+        </div>
+        
+        {% endfor %}
+            
         {{ staff_form.as_p }}
         <input type="submit" value="Register" class="btn btn-primary">
     </form>

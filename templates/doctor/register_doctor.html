@@ -1,35 +1,42 @@
 {% extends 'core/base.html' %}
 
+{% block head_block %}
+{% load static %}
+{% load formcss %}
+<link rel="stylesheet" href="{% static 'css/register_staff.css'%}">
+{% endblock head_block %}
 
 {% block body_block %}
-<h2>Register Doctor View</h2>
-<div class="doctor-form-container">
+<div class="register-staff-form-container">
+    <h4 style="color:#5f5f5f;">Add Doctor</h4>
     <form method="POST">
         {% csrf_token %}
         <div class="form-input">
-            {{user_form.username.label}} {{user_form.username}}
+            {{user_form.username.label}} {{user_form.username | addclass:"form-control" }}
         </div>
 
         <div class="form-input">
-            {{user_form.first_name.label}} {{user_form.first_name}}
+            {{user_form.first_name.label}} {{user_form.first_name | addclass:"form-control"}}
         </div>
 
         <div class="form-input">
-            {{user_form.last_name.label}} {{user_form.last_name}}
+            {{user_form.last_name.label}} {{user_form.last_name | addclass:"form-control" }}
         </div>
 
         <div class="form-input">
-            {{user_form.email.label}} {{user_form.email}}
+            {{user_form.email.label}} {{user_form.email | addclass:"form-control" }}
         </div>
 
         <div class="form-input">
-            {{ doctor_form.as_p }}
+        {{ doctor_form.contact_number.label }} {{ doctor_form.contact_number | addclass:"form-control" }}
         </div>
 
         <div class="form-input">
-            {{user_form.password.label}} {{user_form.password}}
+            {{user_form.password.label}} {{user_form.password | addclass:"form-control"}}
         </div>
         
+        {{ doctor_form.profile_picture.label }} {{ doctor_form.profile_picture }}
+        <hr>
         <input type="submit" value="Register" class="btn btn-primary">
         
     </form>

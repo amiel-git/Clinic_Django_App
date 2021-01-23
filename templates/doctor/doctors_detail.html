@@ -12,9 +12,9 @@
       <p class="card-text">Username: {{doctor_detail.user.username}}</p>
       <p class="card-text">Email: {{doctor_detail.user.email}}</p>
       <p class="card-text">Contact Number: {{doctor_detail.contact_number}}</p>
+      <a href="{% url 'doctor:doctor_update' pk=doctor_detail.user.id %}" class="btn btn-warning">Update</a>
+      <br>
+      <a href="{% url 'doctor:doctor_delete' pk=doctor_detail.id%}" class="btn btn-danger">Delete</a>
     </div>
-    <a href="{% url 'doctor:doctor_update' pk=doctor_detail.user.id %}" class="btn btn-warning">Update</a>
-    <br>
-    <a href="{% url 'doctor:doctor_delete' pk=doctor_detail.id%}" class="btn btn-danger">Delete</a>
   </div>
 {% endblock body_block %}

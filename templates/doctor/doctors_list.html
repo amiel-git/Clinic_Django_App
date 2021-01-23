@@ -1,19 +1,46 @@
 {% extends 'core/base.html' %}
 
+{% block head_block %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/doctor_list.css'%}">
+{% endblock head_block %}
 
 {% block body_block %}
     <div class="jumbotron">
-
-    <h2>Doctors List View</h2>
-    <a href="{% url 'doctor:doctor_create'%}" class="btn btn-primary"> Add Doctor </a>
-    <hr>
+        <h2>Doctors List View</h2>
+        <hr>
+        <a href="{% url 'doctor:doctor_create'%}" class="btn btn-primary"> Add Doctor </a>
+        <hr>
+    </div>
+    
     <div class="doctors-list-container">
-        <ul>
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Username</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Contact Number</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
             {% for doctor in doctors %}
-            <li><a href="{% url 'doctor:doctor_detail' pk=doctor.id %}">{{ doctor.user.first_name | title }} {{ doctor.user.last_name | title }}</a></li>
+            <tr>
+                <th scope="row">{{ doctor.id }}</th>
+                <td>{{ doctor.user.username }}</td>
+                <td><a href="{% url 'doctor:doctor_detail' pk=doctor.id %}">{{ doctor.user.first_name | title }} {{ doctor.user.last_name | title }}</a></td>
+                <td>{{ doctor.user.email }}</td>
+                <td>{{ doctor.contact_number }}</td>
+                <td>
+                    <a href="{% url 'doctor:doctor_update' pk=doctor.user.id %}" class="btn btn-warning">Update</a>
+                    <a href="{% url 'doctor:doctor_delete' pk=doctor.id %}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
             {% endfor %}
-        </ul>
+            </tbody>
+        </table>  
     </div>
 
-</div>
 {% endblock body_block %}
