@@ -11,7 +11,14 @@
 {% block body_block %}
 
 <div class="patient-form-container">
+    {% if patient.id %}
+    <h4 style="color:#5f5f5f;">Patient Update Form</h4>
+
+    {% else %}
     <h4 style="color:#5f5f5f;">Patient Registration Form</h4>
+
+    {% endif%}
+    
     <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     
@@ -39,10 +46,18 @@
         {{ form.profile_picture.label }} {{ form.profile_picture }} 
     </div>
 
+    {% if patient.id %}
+    <div class="form-group">
+        <input type="submit" value="Update" class="btn btn-warning">
+    </div>
+
+    {% else %}
+
     <div class="form-group">
         <input type="submit" value="Add" class="btn btn-primary">
     </div>
 
+    {% endif%}
     </form>
 </div>
 

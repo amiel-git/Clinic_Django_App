@@ -30,14 +30,14 @@
             {% for patient in patients %}
             <tr>
                 <th scope="row">{{ patient.id }}</th>
-                <td><a href="{% url 'patient:list'%}">{{ patient.first_name | title }} {{ patient.last_name | title }}</a></td>
+                <td><a href="{% url 'patient:detail' pk=patient.id%}">{{ patient.first_name | title }} {{ patient.last_name | title }}</a></td>
                 <td>{{ patient.email }}</td>
                 <td>{{ patient.contact_number }}</td>
                 <td>{{ patient.birthday }}</td>
                 <td>{{ patient.created_on }}</td>
                 <td>
-                    <a href="#" class="btn btn-warning">Update</a>
-                    <a href="#" class="btn btn-danger">Delete</a>
+                    <a href="{% url 'patient:update' pk=patient.id%}" class="btn btn-warning">Update</a>
+                    <a href="{% url 'patient:delete' pk=patient.id%}" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
             {% endfor %}

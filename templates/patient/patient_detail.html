@@ -1,0 +1,21 @@
+{% extends 'core/base.html' %}
+
+
+{% block body_block %}
+<h2>Patient Detail View</h2>
+
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">{{patient_detail.first_name | title}} {{patient_detail.last_name | title}}</h5>
+      <br>
+      <h6 class="card-subtitle mb-2 text-muted">Details</h6>
+      <p class="card-text">Email: {{patient_detail.email}}</p>
+      <p class="card-text">Contact Number: {{patient_detail.contact_number}}</p>
+      <p class="card-text">Birthday: {{patient_detail.birthday}}</p>
+      <p class="card-text">Created: {{patient_detail.created_on}}</p>
+      <a href="{% url 'patient:update' pk=patient_detail.id %}" class="btn btn-warning">Update</a>
+      <br>
+      <a href="{% url 'patient:delete' pk=patient_detail.id%}" class="btn btn-danger">Delete</a>
+    </div>
+  </div>
+{% endblock body_block %}
