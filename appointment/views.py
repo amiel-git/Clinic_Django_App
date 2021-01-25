@@ -36,3 +36,19 @@ def CreateAppointmentView(request):
 
         
     return render(request,'appointment/create_appointment.html',context=context)
+
+
+class AppointmentUpdateView(generic.UpdateView):
+
+    template_name = 'appointment/create_appointment.html'
+    model = Appointment
+    fields = [
+            'doctor',
+            'patient',
+            'schedule_date',
+            'schedule_time',
+            'is_paid',
+            'is_complete',
+            'price',
+            'description',
+        ]

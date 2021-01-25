@@ -36,7 +36,7 @@
             <td>{{ appointment.price }}</td>
             <td>{{ appointment.is_paid }}</td>
             <td>
-                <a href="#" class="btn btn-warning">Update</a>
+                <a href="{% url 'appointment:update' pk=appointment.id%}" class="btn btn-warning">Update</a>
                 <a href="#" class="btn btn-danger">Delete</a>
             </td>
         </tr>

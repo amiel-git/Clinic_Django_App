@@ -10,7 +10,12 @@
 
 {% block body_block %}
 <div class="appointment-form-container">
+    {% if appointment.id %}
+    <h4 style="color:#5f5f5f;">Update Appointment</h4>
+    {% else %}
     <h4 style="color:#5f5f5f;">Create Appointment</h4>
+    {% endif%}
+    
     <hr>
     <!-- | addclass:"form-control -->
     <form method="POST">
