@@ -2,6 +2,10 @@ from django.shortcuts import render
 from django.views import generic
 from accounts import forms
 
+from appointment.models import Appointment
+from patient.models import Patient
+from doctor.models import Doctor
+
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
@@ -11,8 +15,24 @@ from django.contrib.auth.decorators import login_required
 
 
 def index(request):
+    appointments = Appointment.objects.all()
+    patients = Patient.objects.all()
+    doctors = Doctor.objects.all()
 
-    return render(request,'core/index.html')
+    num_of_doctors = len(doctors)
+    num_of_patients = len(patients)
+    num_of_appointments = len(appointments)
+
+    context = {
+        'appointments':appointments,
+        'patients':patients,
+        'doctors':doctors,
+        'num_of_doctors':num_of_doctors,
+        'num_of_patients':num_of_patients,
+        'num_of_appointments':num_of_appointments,
+    }
+
+    return render(request,'core/index.html',context=context)
 
 
 def create_staff_view(request):
