@@ -26,9 +26,9 @@
         {% for appointment in appointments %}
         <tr>
             <th scope="row">{{ appointment.id }}</th>
-            <td><a href="#">{{ appointment.patient.first_name | title }} {{ appointment.patient.last_name | title }}</a></td>
+            <td><a href="{% url 'patient:detail' pk=appointment.patient.id %}">{{ appointment.patient.first_name | title }} {{ appointment.patient.last_name | title }}</a></td>
             <td>{{ appointment.schedule_date }}</td>
-            <td><a href="#">{{ appointment.doctor.user.first_name | title }} {{ appointment.doctor.user.last_name | title }}</a></td>
+            <td><a href="{% url 'doctor:doctor_detail' pk=appointment.doctor.id%}">{{ appointment.doctor.user.first_name | title }} {{ appointment.doctor.user.last_name | title }}</a></td>
             <td>{{ appointment.patient.email }}</td>
             <td>{{ appointment.patient.contact_number }}</td>
             <td>{{ appointment.description }}</td>
@@ -36,8 +36,8 @@
             <td>{{ appointment.price }}</td>
             <td>{{ appointment.is_paid }}</td>
             <td>
-                <a href="{% url 'appointment:update' pk=appointment.id%}" class="btn btn-warning">Update</a>
-                <a href="#" class="btn btn-danger">Delete</a>
+                <a href="{% url 'appointment:update' pk=appointment.id %}" class="btn btn-warning">Update</a>
+                <a href="{% url 'appointment:delete' pk=appointment.id %}" class="btn btn-danger">Delete</a>
             </td>
         </tr>
         {% endfor %}

@@ -1,0 +1,20 @@
+{% extends 'core/base.html' %}
+
+{% block body_block %}
+
+<div class="jumbotron">
+
+    <h2>Are you sure you want to delete the appointment listed below?</h2>
+    <p><strong>Appointment ID:</strong> {{ appointment.id }}</p>
+    <p><strong>Patient:</strong> {{ appointment.patient.first_name | title }} {{ appointment.patient.last_name | title }}</p>
+    <p><strong>Doctor:</strong> {{ appointment.doctor.user.first_name | title}} {{ appointment.doctor.user.last_name | title }}</p>
+    <hr>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="submit" value="DELETE" class="btn btn-danger"> <a href="{% url 'appointment:list' %}">cancel</a>
+    </form>
+    
+   
+</div>
+
+{% endblock body_block %}

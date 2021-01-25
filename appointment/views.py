@@ -5,7 +5,7 @@ from appointment.forms import AppointmentForm
 from appointment.models import Appointment
 
 from django.http import HttpResponseRedirect, HttpResponse
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 
 class AllAppointmentsListView(generic.ListView):
 
@@ -52,3 +52,8 @@ class AppointmentUpdateView(generic.UpdateView):
             'price',
             'description',
         ]
+
+class AppointmentDeleteView(generic.DeleteView):
+
+    model = Appointment
+    success_url = reverse_lazy('appointment:list')

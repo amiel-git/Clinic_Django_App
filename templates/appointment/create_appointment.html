@@ -9,10 +9,12 @@
 {% endblock head_block %}
 
 {% block body_block %}
-<div class="appointment-form-container">
+
     {% if appointment.id %}
+    <div class="appointment-update-form-container">
     <h4 style="color:#5f5f5f;">Update Appointment</h4>
     {% else %}
+    <div class="appointment-form-container">
     <h4 style="color:#5f5f5f;">Create Appointment</h4>
     {% endif%}
     
