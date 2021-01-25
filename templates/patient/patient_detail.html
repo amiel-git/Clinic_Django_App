@@ -18,4 +18,9 @@
       <a href="{% url 'patient:delete' pk=patient_detail.id%}" class="btn btn-danger">Delete</a>
     </div>
   </div>
+  <ul>
+   {% for appointment in patient_detail.appointments.all %}
+   <li>{{ appointment.id }}</li>
+   {% endfor %}
+  </ul>
 {% endblock body_block %}
