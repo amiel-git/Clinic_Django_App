@@ -3,6 +3,8 @@ from patient.models import Patient
 from doctor.models import Doctor
 from django.contrib.auth.models import User
 
+from django.urls import reverse
+
 class Appointment(models.Model):
     
     created_by = models.ForeignKey(
@@ -39,6 +41,6 @@ class Appointment(models.Model):
         return f"{self.patient.first_name} {self.patient.last_name} - ID: {self.id}"
     
 
-    # def get_absolute_url(self):
-    #     return reverse("model_detail", kwargs={"pk": self.pk})
+    def get_absolute_url(self):
+        return reverse("appointment:detail", kwargs={"pk": self.pk})
     

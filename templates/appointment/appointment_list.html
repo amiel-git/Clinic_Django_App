@@ -1,10 +1,18 @@
 {% extends 'core/base.html' %}
 
+{% block head_block %}
+
+{% load formcss %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/appointment.css' %}">
+
+{% endblock head_block %}
 
 {% block body_block %}
 
-<h3>Appointment list view</h3>
 
+<div class="appointments-main-container">
+<h3 style="color:#5f5f5f;">Appointments</h3>
 <div class="appointments-list-container">
     <table class="table">
         <thead class="thead-dark">
@@ -27,7 +35,7 @@
         <tr>
             <th scope="row">{{ appointment.id }}</th>
             <td><a href="{% url 'patient:detail' pk=appointment.patient.id %}">{{ appointment.patient.first_name | title }} {{ appointment.patient.last_name | title }}</a></td>
-            <td>{{ appointment.schedule_date }}</td>
+            <td>{{ appointment.schedule_date }} {{ appointment.schedule_time }}</td>
             <td><a href="{% url 'doctor:doctor_detail' pk=appointment.doctor.id%}">{{ appointment.doctor.user.first_name | title }} {{ appointment.doctor.user.last_name | title }}</a></td>
             <td>{{ appointment.patient.email }}</td>
             <td>{{ appointment.patient.contact_number }}</td>
@@ -44,5 +52,5 @@
         </tbody>
     </table>  
 </div>
-
+</div>
 {% endblock %}

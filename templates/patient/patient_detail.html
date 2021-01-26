@@ -1,23 +1,31 @@
 {% extends 'core/base.html' %}
 
+{% block head_block %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/patient.css'%}">
+{% load formcss %}
+
+{% endblock head_block %}
 
 {% block body_block %}
-<h2>Patient Detail View</h2>
-
-<div class="card" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">{{patient_detail.first_name | title}} {{patient_detail.last_name | title}}</h5>
-      <br>
-      <h6 class="card-subtitle mb-2 text-muted">Details</h6>
-      <p class="card-text">Email: {{patient_detail.email}}</p>
-      <p class="card-text">Contact Number: {{patient_detail.contact_number}}</p>
-      <p class="card-text">Birthday: {{patient_detail.birthday}}</p>
-      <p class="card-text">Created: {{patient_detail.created_on}}</p>
-      <a href="{% url 'patient:update' pk=patient_detail.id %}" class="btn btn-warning">Update</a>
-      <br>
-      <a href="{% url 'patient:delete' pk=patient_detail.id%}" class="btn btn-danger">Delete</a>
+    <div class="patient-details-main-container">
+      <div class="patient-info-container">
+        <h3>{{patient_detail.first_name | title}} {{patient_detail.last_name | title}}</h3>
+        <hr>
+        <p><strong style="color:#5f5f5f;">Email:</strong> {{patient_detail.email}}</p>
+        <p><strong style="color:#5f5f5f;">Contact Number:</strong> {{patient_detail.contact_number}}</p>
+        <p><strong style="color:#5f5f5f;">Birthday:</strong> {{patient_detail.birthday}}</p>
+        <p><strong style="color:#5f5f5f;">Created:</strong> {{patient_detail.created_on}}</p>
+        <div class="cta-container">
+          <a href="{% url 'patient:update' pk=patient_detail.id %}" class="btn btn-warning">Update</a>
+          <a href="{% url 'patient:delete' pk=patient_detail.id%}" class="btn btn-danger">Delete</a>
+        </div>
+      </div>
     </div>
-  </div>
+
+
+
   <ul>
    {% for appointment in patient_detail.appointments.all %}
    <li>{{ appointment.id }}</li>

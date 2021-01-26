@@ -1,41 +1,31 @@
 {% extends 'core/base.html' %}
 
 {% block body_block %}
-<div class="jumbotron">
-    <div class="heading">
-        <h2>Welcome to my Clinic API</h2>
-        {% if user.is_authenticated %}
-        <p>You are logged in as {{ user.first_name }} {{ user.last_name }}</p>
-        <hr>
-        <a href="{% url 'accounts:create_staff' %}" class="btn btn-success">Add Staff</a>
-        {% else %}
-        <p>Please login or request for an account to access the application</p>
-        <a href="{% url 'accounts:login' %}" class="btn btn-primary">Login</a>
-        {% endif %}
-    </div>
-</div>
+
     {% if user.is_authenticated %}
-    <div class="row">
-        <div class="col-sm-6">
+    <section class="head-section">
+
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Number of Appointments</h5>
-              <h3 class="card-text">{{ num_of_doctors }}</h3>
-              <a href="{% url 'appointment:create' %}" class="btn btn-primary">New Appointment</a>
+              <h3 class="card-text">{{ num_of_appointments }}</h3>
+              <a href="{% url 'appointment:create' %}" class="btn btn-info">New Appointment</a>
             </div>
           </div>
-        </div>
-        <div class="col-sm-6">
+     
+    
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Number of Patients</h5>
               <h3 class="card-text">{{ num_of_patients }}</h3>
-              <a href="{% url 'patient:create' %}" class="btn btn-primary">New Patient</a>
+              <a href="{% url 'patient:create' %}" class="btn btn-info">New Patient</a>
             </div>
-          </div>
         </div>
-      </div>
-    <h4>Appointments</h4>
+    </section>
+   
+    <hr>
+    <section class="appointments-section">
+    <h3 style="color:#5f5f5f; text-align: center;">Appointments</h3>
     <div>
         <table class="table">
             <thead class="thead-dark">
@@ -74,9 +64,18 @@
             {% endfor %}
             </tbody>
         </table>  
-    {% endif %}
 
+    {% else %}
+    <div class="jumbotron">
+      <div class="heading">
+          <h2>Welcome to my Clinic API</h2>
+          <p>Please login or request for an account to access the application</p>
+          <a href="{% url 'accounts:login' %}" class="btn btn-primary">Login</a>
+      </div>
+  </div>
+    {% endif %}
     </div>
+  </section>
     
 
 {% endblock body_block %}

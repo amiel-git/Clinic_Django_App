@@ -38,6 +38,12 @@ def CreateAppointmentView(request):
     return render(request,'appointment/create_appointment.html',context=context)
 
 
+class AppointmentDetailView(generic.DetailView):
+
+    model = Appointment
+    template_name = 'appointment/appointment_detail.html'
+    context_object_name = 'appointment_detail'
+
 class AppointmentUpdateView(generic.UpdateView):
 
     template_name = 'appointment/create_appointment.html'
