@@ -20,10 +20,11 @@
         <div class="collapse navbar-collapse" id="navbarNav">
 
           <ul class="navbar-nav">
+            {% if user.is_superuser %}
             <li class="nav-item">
               <a class="nav-link" href="http://127.0.0.1:8000/admin">Admin</a>
             </li>
-            {% if user.is_authenticated %} 
+            {% elif user.is_staff %} 
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Staff
@@ -58,6 +59,26 @@
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <a class="dropdown-item" href="{% url 'appointment:list'%}">List</a>
                 <a class="dropdown-item" href="{% url 'appointment:create'%}">Create</a>
+              </div>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a>
+            </li>
+            {% elif user.is_authenticated %}
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Patients
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="{% url 'patient:list' %}">List</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                My Appointments
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="{% url 'appointment:list'%}">List</a>
               </div>
             </li>
             <li class="nav-item active">
