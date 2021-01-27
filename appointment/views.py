@@ -7,13 +7,30 @@ from appointment.models import Appointment
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse, reverse_lazy
 
-class AllAppointmentsListView(generic.ListView):
+from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth.decorators import login_required
 
-    model = Appointment
-    context_object_name = 'appointments'
-    template_name = 'appointment/appointment_list.html'
+from appointment.models import Appointment
+from doctor.models import Doctor
+
+@login_required
+def AppointmentsListView(request):
+
+    if request.user.is_staff:
+        appointments = Appointment.objects.all()
+    
+    else:
+        doctor = Doctor.objects.get(user_id=request.user.id)
+        appointments = Appointment.objects.filter(doctor_id = doctor.id)
+    
+    context = {
+        'appointments':appointments,
+    }
+
+    return render(request,'appointment/appointment_list.html',context=context)
 
 
+@staff_member_required
 def CreateAppointmentView(request):
 
     form = AppointmentForm()
@@ -44,6 +61,8 @@ class AppointmentDetailView(generic.DetailView):
     template_name = 'appointment/appointment_detail.html'
     context_object_name = 'appointment_detail'
 
+
+
 class AppointmentUpdateView(generic.UpdateView):
 
     template_name = 'appointment/create_appointment.html'
@@ -58,6 +77,7 @@ class AppointmentUpdateView(generic.UpdateView):
             'price',
             'description',
         ]
+
 
 class AppointmentDeleteView(generic.DeleteView):
 

@@ -2,7 +2,7 @@
 
 {% block body_block %}
 
-    {% if user.is_authenticated %}
+    {% if user.is_staff %}
     <section class="head-section">
 
           <div class="card">
@@ -64,7 +64,14 @@
             {% endfor %}
             </tbody>
         </table>  
-
+    
+    {% elif user.is_authenticated %}
+    <div class="jumbotron">
+      <div class="heading">
+          <h2>Welcome Dr. {{user.first_name}}</h2>
+          <a href="{% url 'appointment:list' %}" class="btn btn-primary">My Appointments</a>
+      </div>
+    </div>
     {% else %}
     <div class="jumbotron">
       <div class="heading">

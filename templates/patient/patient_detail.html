@@ -17,10 +17,12 @@
         <p><strong style="color:#5f5f5f;">Contact Number:</strong> {{patient_detail.contact_number}}</p>
         <p><strong style="color:#5f5f5f;">Birthday:</strong> {{patient_detail.birthday}}</p>
         <p><strong style="color:#5f5f5f;">Created:</strong> {{patient_detail.created_on}}</p>
+        {% if user.is_staff %}
         <div class="cta-container">
           <a href="{% url 'patient:update' pk=patient_detail.id %}" class="btn btn-warning">Update</a>
           <a href="{% url 'patient:delete' pk=patient_detail.id%}" class="btn btn-danger">Delete</a>
         </div>
+        {% endif %}
       </div>
     </div>
 

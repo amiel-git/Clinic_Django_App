@@ -12,6 +12,7 @@
     <div class="patient-details-main-container">
       <div class="appointment-info-container">
         <h4>Appointment Detail: {{ appointment_detail.id}}</h4>
+        <a href="{% url 'appointment:list' %}" class="btn btn-secondary">Back to list</a>
         <hr>
         <p><strong style="color:#5f5f5f;">Patient Name:</strong> {{appointment_detail.patient.first_name | title}} {{appointment_detail.patient.last_name | title}}</p>
         <p><strong style="color:#5f5f5f;">Schedule:</strong> {{ appointment_detail.schedule_date }} {{ appointment_detail.schedule_time }}</p>
@@ -20,10 +21,12 @@
         <p><strong style="color:#5f5f5f;">Patient Email:</strong> {{appointment_detail.patient.email }}</p>
         <p><strong style="color:#5f5f5f;">Complete:</strong> {{appointment_detail.is_complete }}</p>
         <p><strong style="color:#5f5f5f;">Paid:</strong> {{appointment_detail.is_paid }}</p>
+        {% if user.is_staff %}
         <div class="cta-container">
           <a href="{% url 'appointment:update' pk=appointment_detail.id %}" class="btn btn-warning">Update</a>
           <a href="{% url 'appointment:delete' pk=appointment_detail.id%}" class="btn btn-danger">Delete</a>
         </div>
+        {% endif %}
       </div>
     </div>
 {% endblock body_block %}

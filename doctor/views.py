@@ -11,6 +11,9 @@ from django.urls import reverse, reverse_lazy
 from django.views import generic
 from extra_views import UpdateWithInlinesView, InlineFormSet
 
+from django.contrib.admin.views.decorators import staff_member_required
+
+@staff_member_required
 def create_doctor_view(request):
     user_form = UserForm()
     doctor_form = DoctorForm()

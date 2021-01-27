@@ -11,8 +11,10 @@
     <div>
         <h2>Patients List View</h2>
         <hr>
+        {% if user.is_staff %}
         <a href="{% url 'patient:create'%}" class="btn btn-primary"> Add Patient </a>
         <hr>
+        {% endif %}
     </div>
     
     <div class="patients-list-container">
@@ -23,9 +25,12 @@
                 <th scope="col">Name</th>
                 <th scope="col">Email</th>
                 <th scope="col">Contact Number</th>
+
+                {% if user.is_staff %}
                 <th scope="col">Birthday</th>
                 <th scope="col">Date Added</th>
                 <th scope="col"></th>
+                {% endif %}
             </tr>
             </thead>
             <tbody>
@@ -35,12 +40,15 @@
                 <td><a href="{% url 'patient:detail' pk=patient.id%}">{{ patient.first_name | title }} {{ patient.last_name | title }}</a></td>
                 <td>{{ patient.email }}</td>
                 <td>{{ patient.contact_number }}</td>
+
+                {% if user.is_staff %}
                 <td>{{ patient.birthday }}</td>
                 <td>{{ patient.created_on }}</td>
                 <td>
                     <a href="{% url 'patient:update' pk=patient.id%}" class="btn btn-warning">Update</a>
                     <a href="{% url 'patient:delete' pk=patient.id%}" class="btn btn-danger">Delete</a>
                 </td>
+                {% endif %}
             </tr>
             {% endfor %}
             </tbody>

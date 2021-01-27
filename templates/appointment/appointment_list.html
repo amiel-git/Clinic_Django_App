@@ -25,9 +25,12 @@
             <th scope="col">Contact Number</th>
             <th scope="col">Description</th>
             <th scope="col">Completed</th>
+
+            {% if user.is_staff %}
             <th scope="col">Price</th>
             <th scope="col">Paid</th>
             <th scope="col"></th>
+            {% endif %}
         </tr>
         </thead>
         <tbody>
@@ -41,12 +44,15 @@
             <td>{{ appointment.patient.contact_number }}</td>
             <td>{{ appointment.description }}</td>
             <td>{{ appointment.is_complete }}</td>
+            {% if user.is_staff %}
+            
             <td>{{ appointment.price }}</td>
             <td>{{ appointment.is_paid }}</td>
             <td>
                 <a href="{% url 'appointment:update' pk=appointment.id %}" class="btn btn-warning">Update</a>
                 <a href="{% url 'appointment:delete' pk=appointment.id %}" class="btn btn-danger">Delete</a>
             </td>
+            {% endif %}
         </tr>
         {% endfor %}
         </tbody>
