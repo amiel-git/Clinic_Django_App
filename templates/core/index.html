@@ -1,7 +1,6 @@
 {% extends 'core/base.html' %}
 
 {% block body_block %}
-
     {% if user.is_staff %}
     <section class="head-section">
 
@@ -72,6 +71,45 @@
           <a href="{% url 'appointment:list' %}" class="btn btn-primary">My Appointments</a>
       </div>
     </div>
+    
+    <h4 style="text-align:center; padding:5px">Today's Scheduled Appointments</h4>
+    <table class="table">
+      <thead class="thead-dark">
+      <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Patient</th>
+          <th scope="col">Schedule</th>
+          <th scope="col">Doctor</th>
+          <th scope="col">Email</th>
+          <th scope="col">Contact Number</th>
+          <th scope="col">Description</th>
+          <th scope="col">Completed</th>
+          <th scope="col">Price</th>
+          <th scope="col">Paid</th>
+          <th scope="col"></th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for appointment in appointments_today %}
+      <tr>
+          <th scope="row">{{ appointment.id }}</th>
+          <td><a href="{% url 'patient:detail' pk=appointment.patient.id %}">{{ appointment.patient.first_name | title }} {{ appointment.patient.last_name | title }}</a></td>
+          <td>{{ appointment.schedule_date }}</td>
+          <td><a href="{% url 'doctor:doctor_detail' pk=appointment.doctor.id%}">{{ appointment.doctor.user.first_name | title }} {{ appointment.doctor.user.last_name | title }}</a></td>
+          <td>{{ appointment.patient.email }}</td>
+          <td>{{ appointment.patient.contact_number }}</td>
+          <td>{{ appointment.description }}</td>
+          <td>{{ appointment.is_complete }}</td>
+          <td>{{ appointment.price }}</td>
+          <td>{{ appointment.is_paid }}</td>
+          <td>
+              <a href="{% url 'appointment:update' pk=appointment.id %}" class="btn btn-warning">Update</a>
+              <a href="{% url 'appointment:delete' pk=appointment.id %}" class="btn btn-danger">Delete</a>
+          </td>
+      </tr>
+      {% endfor %}
+      </tbody>
+  </table>  
     {% else %}
     <div class="jumbotron">
       <div class="heading">

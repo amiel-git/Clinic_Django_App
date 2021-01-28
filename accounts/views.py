@@ -14,6 +14,8 @@ from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 
+import datetime as dt
+
 
 def index(request):
 
@@ -33,10 +35,17 @@ def index(request):
             'num_of_doctors':num_of_doctors,
             'num_of_patients':num_of_patients,
             'num_of_appointments':num_of_appointments,
+            
+
         }
 
     else:
-        context = {}
+        appointments_today = Appointment.objects.filter(schedule_date=dt.date.today())
+        num_of_appointments_today = len(appointments_today)
+        context = {
+            'appointments_today':appointments_today,
+            'num_of_appointments_today':num_of_appointments_today,
+        }
 
     return render(request,'core/index.html',context=context)
 
